@@ -4,7 +4,8 @@ import 'package:tatsam_assignment/Screens/HomeScreen/home_event.dart';
 
 class PageTraveller extends StatelessWidget {
   HomeBloc bloc;
-  PageTraveller({this.bloc});
+  ScrollController controller;
+  PageTraveller({this.bloc,this.controller});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,6 +14,7 @@ class PageTraveller extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FlatButton(onPressed: () {
+            controller.jumpTo(0.0);
             if(bloc.startIndex!=0)
             bloc.add(PagePrevEvent());
           },
@@ -23,6 +25,7 @@ class PageTraveller extends StatelessWidget {
           color: Colors.black.withOpacity(0.2),),
           SizedBox(width:10.0),
           FlatButton(onPressed: () {
+            controller.jumpTo(0.0);
             if(bloc.endIndex<bloc.countryList.countries.length-1){
               bloc.add(PageNextEvent());
             }

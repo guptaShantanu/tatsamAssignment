@@ -79,10 +79,11 @@ class _HomeScreenState extends State<HomeScreen> {
           }
           if(state is HomeLoadedState){
             return ListView.builder(
+              controller: controller,
               itemCount: bloc.endIndex-bloc.startIndex+1,
               itemBuilder: (context,index){
                 if(index==bloc.endIndex-bloc.startIndex){
-                  return PageTraveller(bloc: bloc,);
+                  return PageTraveller(bloc: bloc,controller:controller);
                 }
                 return CountryTile(
                   data: state.list.countries[bloc.startIndex+index],
