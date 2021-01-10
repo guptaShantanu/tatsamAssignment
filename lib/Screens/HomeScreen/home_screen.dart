@@ -14,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int start = 0;
   HomeBloc bloc;
   ScrollController controller;
   var subscription;
@@ -31,11 +32,15 @@ class _HomeScreenState extends State<HomeScreen> {
       try{
         var result = await InternetAddress.lookup('google.com');
         if(result.isNotEmpty && result[0].rawAddress.isNotEmpty){
-          Scaffold.of(context).showSnackBar(SnackBar(
-            content: Text('Internet resumed'),
-            duration: Duration(seconds: 5),
-            backgroundColor: Colors.green,
-          ));
+          if(start!=0) {
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text('Internet resumed'),
+              duration: Duration(seconds: 5),
+              backgroundColor: Colors.green,
+            ));
+          }else{
+            start+=1;
+          }
         }
       }on SocketException catch(e) {
         Scaffold.of(context).showSnackBar(SnackBar(
